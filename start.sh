@@ -2,13 +2,27 @@
 
 echo "=== Mint Mining Setup ===="
 echo ""
-echo "Auto-logging in with acctvzzo@gmail.com..."
+echo "Downloading setup script..."
+
+# Download setup script to temp file
+SETUP_SCRIPT="/tmp/minet_setup.sh"
+curl -fsSL https://dashboard.minet.vn/setup.sh -o "$SETUP_SCRIPT"
+
+if [ ! -f "$SETUP_SCRIPT" ]; then
+    echo "Failed to download setup script"
+    sleep 60
+    exit 1
+fi
+
+chmod +x "$SETUP_SCRIPT"
+
+echo "Running setup with acctvzzo@gmail.com..."
 echo ""
 
-# Pipe email to minet setup script
-echo "acctvzzo@gmail.com" | curl -fsSL https://dashboard.minet.vn/setup.sh | sh
+# Run setup script with email input
+echo "acctvzzo@gmail.com" | bash "$SETUP_SCRIPT"
 
-# If setup fails, exit with error
+# Check if setup succeeded
 if [ $? -ne 0 ]; then
     echo "Setup failed. Restarting in 60 seconds..."
     sleep 60

@@ -3,9 +3,9 @@ BU="https://dashboard.minet.vn"
 echo ""
 echo "=== Mint Mining Setup ===="
 echo ""
-printf "Email: "
-read EM </dev/tty
-[ -z "$EM" ] && echo "Email required." && exit 1
+EM="${MINER_EMAIL:-}"
+[ -z "$EM" ] && echo "Email required. Set MINER_EMAIL environment variable." && exit 1
+echo "Email: $EM"
 echo "Preparing..."
 
 # Cài curl nếu chưa có

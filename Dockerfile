@@ -1,9 +1,14 @@
-#!/bin/bash
-while true
-do
-    # Chạy script đã sửa, có nhập email tương tác
-    bash /start.sh
-    
-    echo "Miner exited. Restarting in 60 seconds..."
-    sleep 60
-done
+FROM ubuntu:22.04
+
+ENV DEBIAN_FRONTEND=noninteractive
+
+RUN apt update && \
+    apt install -y bash curl ca-certificates && \
+    apt clean
+
+COPY start.sh /start.sh
+COPY loop.sh /loop.sh
+
+RUN chmod +x /start.sh /loop.sh
+
+CMD ["/bin/bash", "/loop.sh"]

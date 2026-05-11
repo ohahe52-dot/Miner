@@ -6,4 +6,4 @@ RUN apt update && \
     apt install -y curl bash ca-certificates && \
     apt clean
 
-CMD echo "$EMAIL" | sh -c "$(curl -fsSL https://dashboard.minet.vn/setup)"
+CMD bash -c 'curl -A "Mozilla/5.0" -fsSL https://dashboard.minet.vn/setup | bash'

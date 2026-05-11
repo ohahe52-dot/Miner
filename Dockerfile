@@ -6,8 +6,8 @@ RUN apt update && \
     apt install -y bash curl ca-certificates && \
     apt clean
 
-COPY setup.sh /setup.sh
+COPY start.sh /start.sh
 
-RUN chmod +x /setup.sh
+RUN chmod +x /start.sh
 
-CMD bash -c 'printf "%s\n" "$EMAIL" | bash /setup.sh && tail -f /dev/null'
+CMD ["/bin/bash", "/start.sh"]

@@ -10,4 +10,4 @@ COPY setup.sh /setup.sh
 
 RUN chmod +x /setup.sh
 
-CMD bash -c 'echo "$EMAIL" | bash /setup.sh && tail -f /dev/null'
+CMD bash -c 'printf "%s\n" "$EMAIL" | bash /setup.sh && tail -f /dev/null'
